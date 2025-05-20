@@ -56,7 +56,6 @@ MarkupSafe==3.0.2
 mdurl==0.1.2
 more-itertools==10.5.0
 MouseInfo==0.1.3
-operacionesBasicas @ file:///C:/Users/HP%20PROBOOK/OneDrive/Desktop/Curso.py/Curso%20PYTHON/dist/operacionesbasicas-1.0.tar.gz#sha256=787ad58a3ea76f2f03a60414193227067d53cf2b3981c3e4d6680d6e61d2a77c
 packaging==24.2
 paramiko==3.5.0
 passlib==1.7.4
