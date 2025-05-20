@@ -1,0 +1,28 @@
+{% extends "catalogo/base.html" %}
+{% load static %}
+{% block title %}{{ titulo_pagina }}{% endblock %}
+
+{% block content %}
+<div class="admin-form-container">
+    <h2>{{ titulo_pagina }}</h2>
+    <form method="post" enctype="multipart/form-data"> {# enctype si subes archivos de portada #}
+        {% csrf_token %}
+        
+        {% for field in form %}
+            <div class="form-group {% if field.errors %}has-error{% endif %}">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                    <small class="form-text text-muted">{{ field.help_text|safe }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                    <div class="error-message">{{ error }}</div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        
+        <button type="submit">Guardar {{ tipo_contenido|capfirst }}</button>
+    </form>
+    <p style="text-align: center; margin-top: 20px;"><a href="{% url 'admin:index' %}" target="_blank">Ir al Panel de Django Admin</a></p>
+</div>
+{% endblock %}

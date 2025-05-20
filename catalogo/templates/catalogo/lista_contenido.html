@@ -1,0 +1,49 @@
+{% extends "catalogo/base.html" %}
+{% load static %}
+{% block title %}{{ page_title|default:"Contenido" }} - CineManía{% endblock %}
+
+{% block content %}
+<h2 class="section-title">{{ page_title|default:"Contenido Disponible" }}</h2>
+
+{% comment %} Placeholder para un bloque de anuncio responsivo debajo del título {% endcomment %}
+{% include "catalogo/partials/_ad_block_placeholder.html" %}
+
+<div class="contenido-grid" id="contenidoGrid">
+    {% comment %} Determinar qué lista de items usar basado en tipo_contenido {% endcomment %}
+    {% if tipo_contenido == 'pelicula' %}
+        {% for item in peliculas %}
+            {% include "catalogo/partials/_item_contenido.html" with item=item tipo_item=tipo_contenido %}
+        {% empty %}
+            <p class="no-resultados" style="grid-column: 1 / -1;">No hay películas disponibles en este momento.</p>
+        {% endfor %}
+    {% elif tipo_contenido == 'serie' %}
+        {% for item in series_items %} {# Asegúrate que la vista 'lista_series' pase 'series_items' #}
+            {% include "catalogo/partials/_item_contenido.html" with item=item tipo_item=tipo_contenido %}
+        {% empty %}
+            <p class="no-resultados" style="grid-column: 1 / -1;">No hay series disponibles en este momento.</p>
+        {% endfor %}
+    {% elif tipo_contenido == 'anime' %}
+        {% for item in animes_items %} {# Asegúrate que la vista 'lista_animes' pase 'animes_items' #}
+            {% include "catalogo/partials/_item_contenido.html" with item=item tipo_item=tipo_contenido %}
+        {% empty %}
+            <p class="no-resultados" style="grid-column: 1 / -1;">No hay animes disponibles en este momento.</p>
+        {% endfor %}
+    {% endif %}
+</div>
+
+{% if mostrar_boton_mas %}
+<button id="btnMostrarMasContenido" class="btn-mostrar-mas"
+        data-tipo="{{ tipo_contenido }}"
+        {# Para data-initial-items, necesitamos saber qué lista se está usando #}
+        {% if tipo_contenido == 'pelicula' %}
+            data-initial-items="{{ peliculas|length }}"
+        {% elif tipo_contenido == 'serie' %}
+            data-initial-items="{{ series_items|length }}"
+        {% elif tipo_contenido == 'anime' %}
+            data-initial-items="{{ animes_items|length }}"
+        {% endif %}
+        data-items-per-load="5">
+    Mostrar más
+</button>
+{% endif %}
+{% endblock %}

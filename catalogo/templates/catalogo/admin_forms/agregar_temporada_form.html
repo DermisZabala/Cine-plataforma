@@ -1,0 +1,33 @@
+{% extends "catalogo/base.html" %}
+{% load static %}
+{% block title %}{{ titulo_pagina|default:"Agregar Temporada" }} - CineManía{% endblock %}
+
+{% block content %}
+<div class="admin-form-container">
+    <h2>{{ titulo_pagina|default:"Agregar Nueva Temporada" }}</h2>
+    <form method="post"> {# No necesitas enctype="multipart/form-data" aquí usualmente #}
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div class="form-group {% if field.errors %}has-error{% endif %}">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                    <small class="form-text text-muted">{{ field.help_text|safe }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                    <div class="error-message" style="color: red; font-size: 0.9em;">{{ error }}</div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <button type="submit">Guardar Temporada</button>
+    </form>
+    <p style="text-align: center; margin-top: 20px;"><a href="{% url 'admin:index' %}" target="_blank">Ir al Panel de Django Admin</a></p>
+    {% if tipo_parent == 'serie' %}
+        <p style="text-align: center; margin-top: 10px;"><a href="{% url 'catalogo:agregar_contenido' tipo_contenido='serie' %}">Volver a Agregar Serie</a></p>
+    {% elif tipo_parent == 'anime' %}
+        <p style="text-align: center; margin-top: 10px;"><a href="{% url 'catalogo:agregar_contenido' tipo_contenido='anime' %}">Volver a Agregar Anime</a></p>
+    {% endif %}
+</div>
+{% endblock %}

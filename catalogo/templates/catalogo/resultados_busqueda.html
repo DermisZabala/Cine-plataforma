@@ -1,0 +1,44 @@
+{% extends "catalogo/base.html" %}
+{% load static %}
+{% block title %}Resultados de Búsqueda para "{{ query }}"{% endblock %}
+
+{% block content %}
+<div class="resultados-container">
+    <h2 class="section-title">Resultados de Búsqueda</h2>
+
+    <div class="query-info">
+        {% if query %}
+            <p>Resultados para: <strong>"{{ query }}"</strong>
+            {% if tipo_filtro and tipo_filtro != 'todos' %}
+                en <strong>{{ tipo_filtro|capfirst }}s</strong>
+            {% endif %}
+            </p>
+        {% else %}
+            <p>Por favor, introduce un término de búsqueda.</p>
+        {% endif %}
+    </div>
+    
+    {% comment %} Filtros adicionales (opcional) {% endcomment %}
+    <div style="text-align: center; margin-bottom: 20px;">
+        Filtrar por:
+        <a href="{% url 'catalogo:busqueda' %}?q={{ query }}&tipo=todos" class="{% if not tipo_filtro or tipo_filtro == 'todos' %}active{% endif %}">Todos</a> |
+        <a href="{% url 'catalogo:busqueda' %}?q={{ query }}&tipo=peliculas" class="{% if tipo_filtro == 'peliculas' %}active{% endif %}">Películas</a> |
+        <a href="{% url 'catalogo:busqueda' %}?q={{ query }}&tipo=series" class="{% if tipo_filtro == 'series' %}active{% endif %}">Series</a> |
+        <a href="{% url 'catalogo:busqueda' %}?q={{ query }}&tipo=animes" class="{% if tipo_filtro == 'animes' %}active{% endif %}">Anime</a>
+         <style> /* Estilo rápido para el filtro activo */
+            .query-info + div a.active { font-weight: bold; color: #03a9f4; }
+         </style>
+    </div>
+
+
+    {% if resultados %}
+        <div class="contenido-grid">
+            {% for item in resultados %}
+                 {% include "catalogo/partials/_item_contenido.html" with item=item tipo_item=item.tipo_contenido_str %}
+            {% endfor %}
+        </div>
+    {% elif query %}
+        <p class="no-resultados">No se encontraron resultados para tu búsqueda.</p>
+    {% endif %}
+</div>
+{% endblock %}

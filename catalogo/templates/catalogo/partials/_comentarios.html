@@ -1,0 +1,49 @@
+{% load static %}
+{% comment %}
+Este parcial espera:
+- item: la instancia de Pelicula, Serie, o Anime
+- comentarios: queryset inicial de comentarios
+- form_comentario: instancia del ComentarioForm
+- mostrar_mas_comentarios: boolean
+- content_type_id: id del contenttype del item
+- object_id: id del item
+- comentario_enviado: boolean (opcional, desde query param)
+{% endcomment %}
+
+<section class="comentarios-seccion">
+    <h2>Comentarios ({{ item.comentarios.count }})</h2> {# Necesitas añadir related_name='comentarios' a GenericRelation en los modelos principales para esto, o calcularlo en la vista #}
+                                                      {# O simplemente mostrar el total_comentarios de la vista #}
+                                                      {# Usando total_comentarios_en_vista: {{ total_comentarios_en_vista }} #}
+
+
+    {% if comentario_enviado %}
+        <p class="mensaje-comentario-enviado">¡Gracias! Tu comentario ha sido enviado y está pendiente de aprobación.</p>
+    {% endif %}
+
+    <div id="listaComentarios">
+        {% for comentario in comentarios %}
+            {% include "catalogo/partials/_comentario_item.html" with comentario=comentario %}
+        {% empty %}
+            {% if not comentario_enviado %} {# No mostrar si acaba de enviar y no hay otros #}
+            <p>Sé el primero en comentar.</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    {% if mostrar_mas_comentarios %}
+    <button id="btnMostrarMasComentarios" class="btn-mostrar-mas"
+            data-content-type-id="{{ content_type_id }}"
+            data-object-id="{{ object_id }}"
+            data-initial-items="{{ comentarios|length }}">
+        Mostrar más comentarios
+    </button>
+    {% endif %}
+
+    <hr style="border-color: #333; margin: 2rem 0;">
+    <h3>Deja tu Comentario</h3>
+    <form method="post" id="formComentario">
+        {% csrf_token %}
+        {{ form_comentario.as_p }}
+        <button type="submit" name="submit_comentario">Enviar Comentario</button>
+    </form>
+</section>

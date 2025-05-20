@@ -1,0 +1,5 @@
+<div class="comentario-item">
+    <strong class="nombre-autor">{{ comentario.nombre_autor }}</strong>
+    <small class="fecha-comentario">{{ comentario.fecha_creacion|date:"d M Y, H:i" }}</small>
+    <p class="texto-comentario">{{ comentario.texto|linebreaksbr }}</p>
+</div>

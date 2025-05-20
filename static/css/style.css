@@ -1,0 +1,815 @@
+/* Reset básico y Fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Orbitron:wght@400;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    background-color: #0f0f1a; /* Fondo oscuro principal, azulado */
+    /* Opcional: imagen de fondo sutil */
+    /* background-image: url("{% static 'images/bg-pattern.png' %}"); */
+    /* background-repeat: repeat; */
+    color: #e0e0e0; /* Texto claro principal */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header y Navegación */
+header {
+    background-color: rgba(10, 10, 20, 0.85); /* Un poco más oscuro, semitransparente */
+    backdrop-filter: blur(5px); /* Efecto vidrio esmerilado */
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+    border-bottom: 3px solid #6200ea; /* Morado neón o un azul eléctrico #03a9f4 */
+    position: sticky; /* Para que se quede fijo al hacer scroll */
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+header .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header h1 a {
+    font-family: 'Orbitron', sans-serif; /* Fuente futurista/tecnológica */
+    color: #6200ea; /* Morado neón */
+    text-decoration: none;
+    font-size: 2.2rem;
+    text-shadow: 0 0 5px #6200ea, 0 0 10px #6200ea;
+}
+header h1 a:hover {
+    color: #7e3ff2;
+    text-shadow: 0 0 8px #7e3ff2, 0 0 15px #7e3ff2;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex; /* Para alinear horizontalmente */
+}
+
+nav ul li {
+    margin-left: 20px; /* Espacio entre items */
+}
+
+nav ul li a {
+    color: #e0e0e0;
+    text-decoration: none;
+    font-size: 1.1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 20px; /* Botones más redondeados */
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+    font-weight: bold;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    background-color: #6200ea;
+    color: #fff;
+    box-shadow: 0 0 10px #6200ea, 0 0 5px #fff;
+}
+
+/* Buscador en el Header */
+.search-container {
+    display: flex;
+    align-items: center;
+}
+.search-container form {
+    display: flex;
+}
+.search-container input[type="search"] {
+    padding: 8px 12px;
+    border: 1px solid #444;
+    border-radius: 20px 0 0 20px;
+    background-color: #222;
+    color: #e0e0e0;
+    font-size: 0.9rem;
+    outline: none;
+    width: 200px; /* Ajusta según necesidad */
+    transition: border-color 0.3s;
+}
+.search-container input[type="search"]:focus {
+    border-color: #6200ea;
+}
+.search-container button[type="submit"] {
+    padding: 8px 15px;
+    background-color: #6200ea;
+    color: white;
+    border: none;
+    border-radius: 0 20px 20px 0;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.3s;
+}
+.search-container button[type="submit"]:hover {
+    background-color: #7e3ff2;
+}
+
+/* Contenedor Principal */
+.container {
+    width: 90%;
+    max-width: 1300px; /* Un poco más ancho */
+    margin: 2.5rem auto;
+    padding: 1rem;
+    flex-grow: 1;
+}
+
+h2.section-title {
+    font-family: 'Orbitron', sans-serif;
+    color: #03a9f4; /* Azul eléctrico */
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 0 3px #03a9f4;
+}
+
+
+/* Página de Inicio - Últimas Publicaciones */
+.ultimas-publicaciones {
+    margin-bottom: 3rem;
+}
+.ultimas-publicaciones .contenido-grid { /* Reutilizamos contenido-grid */
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); /* Ajustar tamaño */
+}
+.ultimas-publicaciones .contenido-item { /* Estilo especial para destacados */
+    border: 2px solid transparent;
+    transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+.ultimas-publicaciones .contenido-item:hover {
+    border-color: #03a9f4; /* Azul eléctrico al pasar el mouse */
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(3, 169, 244, 0.3);
+}
+.ultimas-publicaciones .contenido-item .tipo-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #6200ea;
+    color: white;
+    padding: 3px 8px;
+    font-size: 0.75rem;
+    border-radius: 3px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+
+/* Opciones principales en Inicio */
+.inicio-secciones {
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch; /* Para que tengan la misma altura */
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 3rem;
+}
+
+.seccion-card {
+    background: linear-gradient(145deg, #1a1a2e, #11111f); /* Gradiente sutil */
+    color: #fff;
+    padding: 2.5rem 1.5rem;
+    text-decoration: none;
+    font-size: 1.8rem;
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    text-align: center;
+    flex-basis: 30%; /* Para 3 columnas */
+    min-width: 280px;
+    border: 2px solid #333;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.seccion-card h2 {
+    font-family: 'Orbitron', sans-serif;
+    margin: 0;
+}
+.seccion-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 25px rgba(98, 0, 234, 0.4); /* Sombra morada */
+    border-color: #6200ea;
+}
+
+/* Listas de Contenido (Películas, Series, Anime) */
+.contenido-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 25px; /* Más espacio */
+    margin-top: 20px;
+}
+
+.contenido-item {
+    background-color: #1c1c2b; /* Un poco más claro que el fondo */
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    color: #e0e0e0;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    position: relative; /* Para el tag de tipo */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.contenido-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(98, 0, 234, 0.25); /* Sombra morada sutil */
+}
+
+.contenido-item img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-bottom: 3px solid #6200ea; /* Detalle de color */
+}
+
+.contenido-item-info {
+    padding: 15px; /* Más padding */
+    flex-grow: 1;
+}
+
+.contenido-item-info h3 {
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+    color: #fff;
+    font-weight: bold;
+}
+.contenido-item-info p {
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
+.btn-mostrar-mas {
+    display: block;
+    width: 220px;
+    margin: 40px auto;
+    padding: 12px 20px;
+    background-color: #6200ea;
+    color: #fff;
+    border: none;
+    border-radius: 25px; /* Más redondeado */
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-mostrar-mas:hover {
+    background-color: #7e3ff2;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(98, 0, 234, 0.4);
+}
+.btn-mostrar-mas:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Detalles de Contenido */
+.detalle-contenido {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px; /* Más espacio */
+    margin-top: 20px;
+    padding: 20px;
+    background-color: rgba(28, 28, 43, 0.7); /* Fondo semitransparente para el bloque de detalle */
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.detalle-portada {
+    flex: 1;
+    min-width: 280px;
+}
+
+.detalle-portada img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    border: 3px solid #444;
+}
+
+.detalle-info {
+    flex: 2;
+    min-width: 320px;
+}
+
+.detalle-info h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.8rem;
+    color: #fff;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+}
+
+.detalle-info p {
+    margin-bottom: 12px;
+    line-height: 1.7;
+    font-size: 1.05rem;
+}
+.detalle-info strong {
+    color: #03a9f4; /* Azul eléctrico para destacar */
+    font-weight: bold;
+}
+.detalle-info .generos-lista span {
+    background-color: #333;
+    color: #03a9f4;
+    padding: 3px 8px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    margin-right: 5px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+
+/* Reproductor de Video y Episodios */
+.video-reproductor, .episodio-reproductor {
+    margin-top: 40px;
+    background-color: #0a0a14; /* Más oscuro */
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+.video-reproductor h2, .episodio-reproductor h3 {
+    color: #03a9f4;
+    margin-bottom: 15px;
+    font-family: 'Orbitron', sans-serif;
+}
+.video-reproductor iframe, .episodio-reproductor iframe {
+    width: 100%;
+    min-height: 480px;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Temporadas y Episodios (Acordeón) */
+.temporadas-lista {
+    margin-top: 40px;
+}
+.temporadas-lista > h2 { /* Estilo para el H2 "Temporadas y Episodios" */
+    font-family: 'Orbitron', sans-serif;
+    color: #03a9f4;
+    margin-bottom: 20px;
+}
+
+.temporada {
+    background-color: #1c1c2b;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #2a2a3a;
+}
+
+.temporada-header {
+    background-color: #2a2a3a; /* Un poco más claro que el item */
+    color: #fff;
+    padding: 12px 18px;
+    cursor: pointer;
+    font-size: 1.3rem; /* Más grande */
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+.temporada-header:hover {
+    background-color: #3a3a4a;
+}
+.temporada-header .arrow {
+    transition: transform 0.3s ease;
+    font-size: 1.5rem; /* Icono más grande */
+    color: #03a9f4;
+}
+.temporada-header.active .arrow {
+    transform: rotate(90deg);
+}
+
+.episodios-lista {
+    list-style: none;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out, padding 0.5s ease-in-out; /* Añadir padding a la transición */
+}
+.temporada-header.active + .episodios-lista {
+    max-height: 1000px; /* Suficientemente grande */
+    padding: 10px 0; /* Padding cuando está abierto */
+}
+
+.episodios-lista li {
+    padding: 12px 18px;
+    border-bottom: 1px solid #222230;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+.episodios-lista li:hover {
+    background-color: #222230;
+}
+.episodios-lista li:last-child {
+    border-bottom: none;
+}
+.episodios-lista li a.btn-reproducir-episodio {
+    background-color: #6200ea;
+    color: #fff;
+    padding: 6px 12px;
+    text-decoration: none;
+    border-radius: 15px; /* Redondeado */
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    white-space: nowrap; /* Evita que el texto se parta */
+}
+.episodios-lista li a.btn-reproducir-episodio:hover {
+    background-color: #7e3ff2;
+    transform: scale(1.05);
+}
+.episodios-lista li span {
+    flex-grow: 1;
+    margin-right: 10px; /* Espacio antes del botón */
+}
+
+/* Sección de Comentarios */
+.comentarios-seccion {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: rgba(28, 28, 43, 0.7);
+    border-radius: 12px;
+}
+.comentarios-seccion h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: #03a9f4;
+    margin-bottom: 20px;
+}
+.comentario-item {
+    background-color: #161622;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #6200ea;
+}
+.comentario-item strong.nombre-autor {
+    color: #03a9f4;
+    font-size: 1.1rem;
+}
+.comentario-item small.fecha-comentario {
+    color: #888;
+    font-size: 0.8rem;
+    margin-left: 10px;
+}
+.comentario-item p.texto-comentario {
+    margin-top: 8px;
+    color: #ccc;
+    line-height: 1.5;
+}
+#formComentario {
+    margin-top: 20px;
+}
+#formComentario p {
+    margin-bottom: 10px;
+}
+#formComentario label {
+    display: block;
+    margin-bottom: 5px;
+    color: #bbb;
+}
+#formComentario input[type="text"],
+#formComentario input[type="email"],
+#formComentario textarea {
+    width: 100%;
+    padding: 10px;
+    background-color: #222230;
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: #e0e0e0;
+    font-size: 1rem;
+    margin-bottom: 10px; /* Espacio entre campos */
+}
+#formComentario textarea {
+    resize: vertical;
+}
+#formComentario button[type="submit"] {
+    padding: 10px 20px;
+    background-color: #6200ea;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+#formComentario button[type="submit"]:hover {
+    background-color: #7e3ff2;
+}
+.mensaje-comentario-enviado {
+    background-color: #03a9f4;
+    color: #0f0f1a;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+/* Formularios de Administración (Frontend) */
+.admin-form-container {
+    background-color: #1c1c2b;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 700px;
+    margin: 30px auto;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+.admin-form-container h2 {
+    text-align: center;
+    color: #03a9f4;
+    margin-bottom: 25px;
+    font-family: 'Orbitron', sans-serif;
+}
+.admin-form-container .form-group {
+    margin-bottom: 20px;
+}
+.admin-form-container label {
+    display: block;
+    margin-bottom: 8px;
+    color: #bbb;
+    font-weight: bold;
+}
+.admin-form-container input[type="text"],
+.admin-form-container input[type="url"],
+.admin-form-container input[type="number"],
+.admin-form-container textarea,
+.admin-form-container select {
+    width: 100%;
+    padding: 12px;
+    background-color: #222230;
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: #e0e0e0;
+    font-size: 1rem;
+}
+.admin-form-container textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+.admin-form-container .checkbox-multiple label { /* Para generos */
+    display: inline-block;
+    margin-right: 15px;
+    font-weight: normal;
+}
+.admin-form-container .checkbox-multiple input[type="checkbox"] {
+    margin-right: 5px;
+    vertical-align: middle;
+}
+.admin-form-container button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    background-color: #6200ea;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+.admin-form-container button[type="submit"]:hover {
+    background-color: #7e3ff2;
+}
+
+/* Resultados de Búsqueda */
+.resultados-container h2 { /* Reutiliza section-title */ }
+.resultados-container .query-info {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #bbb;
+}
+.resultados-container .query-info strong {
+    color: #03a9f4;
+}
+.no-resultados {
+    text-align: center;
+    font-size: 1.3rem;
+    color: #aaa;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #1c1c2b;
+    border-radius: 8px;
+}
+
+/* Ad Placeholders */
+.ad-banner-placeholder, .ad-block-placeholder {
+    background-color: #333;
+    color: #888;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    font-style: italic;
+    margin: 20px auto; /* Centrado y con margen */
+}
+.ad-banner-placeholder {
+    width: 100%;
+    max-width: 728px; /* Tamaño banner estándar */
+    height: 90px;
+}
+.ad-block-placeholder {
+    width: 100%;
+    max-width: 300px;
+    height: 250px; /* Bloque mediano */
+}
+/* Ubicaciones específicas */
+.sidebar .ad-block-placeholder {
+    margin: 20px 0;
+}
+.detalle-info .ad-block-placeholder { /* Debajo de la sinopsis */
+    margin-top: 20px;
+}
+
+
+/* Footer */
+footer {
+    background-color: #0a0a14; /* Más oscuro */
+    color: #757575;
+    text-align: center;
+    padding: 1.5rem 0;
+    margin-top: auto;
+    border-top: 1px solid #222;
+    font-size: 0.9rem;
+}
+
+/* Responsividad */
+@media (max-width: 992px) {
+    header .header-content {
+        flex-direction: column;
+        align-items: center;
+    }
+    header h1 a {
+        margin-bottom: 10px;
+    }
+    nav ul {
+        margin-top: 10px;
+        flex-wrap: wrap; /* Para que los items de nav pasen a otra línea si no caben */
+        justify-content: center;
+    }
+    nav ul li {
+        margin: 5px 10px; /* Ajustar margen para nav items */
+    }
+    .search-container {
+        margin-top: 15px;
+        width: 80%; /* Hacer buscador más ancho en pantallas medianas */
+    }
+    .search-container input[type="search"]{
+        flex-grow: 1; /* Permitir que el input crezca */
+    }
+    .seccion-card {
+        flex-basis: 45%; /* Dos columnas */
+    }
+}
+
+@media (max-width: 768px) {
+    header h1 a {
+        font-size: 2rem;
+    }
+    .search-container {
+        width: 90%;
+    }
+    .container {
+        width: 95%;
+    }
+    .detalle-contenido {
+        flex-direction: column;
+    }
+    .detalle-portada, .detalle-info {
+        flex: none;
+        width: 100%;
+    }
+    .detalle-portada img {
+        display: block;
+        margin: 0 auto 20px auto; /* Centra la imagen y añade margen inferior */
+        max-width: 300px; /* Limitar tamaño en móviles */
+    }
+    .video-reproductor iframe, .episodio-reproductor iframe {
+        min-height: 300px;
+    }
+    .contenido-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); /* Más pequeñas en móviles */
+    }
+    .contenido-item img {
+        height: 240px;
+    }
+    .seccion-card {
+        flex-basis: 100%; /* Una columna */
+        padding: 2rem 1rem;
+    }
+    .ultimas-publicaciones .contenido-grid {
+         grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 a {
+        font-size: 1.8rem;
+    }
+    nav ul li a {
+        font-size: 1rem;
+        padding: 0.4rem 0.8rem;
+    }
+    .search-container input[type="search"]{
+        font-size: 0.8rem;
+    }
+    .search-container button[type="submit"]{
+        font-size: 0.8rem;
+        padding: 8px 10px;
+    }
+    .detalle-info h1 {
+        font-size: 2rem;
+    }
+    .contenido-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* Aún más pequeñas */
+         gap: 15px;
+    }
+     .contenido-item img {
+        height: 200px;
+    }
+    .btn-mostrar-mas {
+        width: 180px;
+        font-size: 1rem;
+        padding: 10px 15px;
+    }
+    .ultimas-publicaciones .contenido-grid {
+         grid-template-columns: 1fr; /* Una columna para las últimas en móviles muy pequeños */
+    }
+}
+
+/* CSS Adicional para el dropdown de Admin en base.html (añadir a style.css) */
+nav ul li.dropdown {
+    position: relative;
+}
+nav ul li.dropdown .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #1c1c2b; /* Color de fondo del dropdown */
+    min-width: 220px; /* Ancho mínimo */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.3);
+    z-index: 1;
+    border-radius: 5px;
+    padding: 10px 0;
+    top: 100%; /* Se muestra debajo del item "Admin" */
+    left: 50%;
+    transform: translateX(-50%); /* Centrar el dropdown */
+}
+nav ul li.dropdown:hover .dropdown-content { /* ESTA LÍNEA LO HACE FUNCIONAR AL PASAR EL MOUSE */
+    display: block;
+}
+nav ul li.dropdown .dropdown-content li {
+    width: 100%;
+    margin-left: 0; /* Resetear margen para items del dropdown */
+}
+nav ul li.dropdown .dropdown-content a {
+    color: #e0e0e0;
+    padding: 10px 15px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.95rem; /* Tamaño de fuente para items del dropdown */
+    border-radius: 0; /* Sin redondeo para items internos */
+    white-space: nowrap;
+}
+nav ul li.dropdown .dropdown-content a:hover {
+    background-color: #6200ea; /* Color al pasar el mouse */
+    color: #fff;
+    box-shadow: none; /* Quitar sombra del link activo/hover general */
+}
+nav ul li.dropdown .dropdown-content hr {
+    border: none;
+    border-top: 1px solid #333;
+    margin: 5px 0;
+}

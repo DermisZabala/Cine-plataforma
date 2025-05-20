@@ -1,0 +1,21 @@
+{% load static %}
+{% comment %}
+Este parcial espera:
+- item: instancia de Pelicula, Serie o Anime
+- tipo_item: string 'pelicula', 'serie', o 'anime' (para la URL)
+{% endcomment %}
+
+<a href="{% if tipo_item == 'pelicula' %}{% url 'catalogo:detalle_pelicula' pk=item.pk %}
+         {% elif tipo_item == 'serie' %}{% url 'catalogo:detalle_serie' pk=item.pk %}
+         {% elif tipo_item == 'anime' %}{% url 'catalogo:detalle_anime' pk=item.pk %}
+         {% else %}#{% comment %} URL de fallback si tipo_item no es ninguno de los esperados {% endcomment %}{% endif %}"
+   class="contenido-item">
+    <img src="{{ item.portada_url|default_if_none:'' }}{% if not item.portada_url %}{% static 'images/placeholder_poster.png' %}{% endif %}" alt="{{ item.titulo }}">
+    <div class="contenido-item-info">
+        <h3>{{ item.titulo }}</h3>
+        <p>{{ item.año_lanzamiento }}</p>
+    </div>
+    {% if tipo_item %}
+    <span class="tipo-tag">{{ tipo_item|capfirst }}</span>
+    {% endif %}
+</a>

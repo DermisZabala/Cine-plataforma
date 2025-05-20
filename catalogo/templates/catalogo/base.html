@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CineManía{% endblock %} - Tu Plataforma de Streaming</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Favicon (opcional) -->
+    <!-- <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon"> -->
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            {# --- CORRECCIÓN AQUÍ --- #}
+            <h1><a href="{% url 'catalogo:inicio' %}">CineManía</a></h1>
+            <nav>
+                <ul>
+                    {# --- CORRECCIONES AQUÍ --- #}
+                    <li><a href="{% url 'catalogo:inicio' %}">Inicio</a></li>
+                    <li><a href="{% url 'catalogo:lista_peliculas' %}">Películas</a></li>
+                    <li><a href="{% url 'catalogo:lista_series' %}">Series</a></li>
+                    <li><a href="{% url 'catalogo:lista_animes' %}">Anime</a></li>
+                    {% if user.is_authenticated and user.is_superuser %}
+                    <li class="dropdown">
+                        <a href="#">Admin ▾</a>
+                        <ul class="dropdown-content">
+                            {# --- CORRECCIONES AQUÍ (ya las tenías bien para estas) --- #}
+                            <li><a href="{% url 'catalogo:agregar_contenido' tipo_contenido='pelicula' %}">Añadir Película</a></li>
+                            <li><a href="{% url 'catalogo:agregar_contenido' tipo_contenido='serie' %}">Añadir Serie</a></li>
+                            <li><a href="{% url 'catalogo:agregar_contenido' tipo_contenido='anime' %}">Añadir Anime</a></li>
+                            <li><hr></li>
+                            <li><a href="{% url 'catalogo:agregar_temporada' tipo_parent='serie' %}">Añadir Temporada (Serie)</a></li>
+                            <li><a href="{% url 'catalogo:agregar_episodio' tipo_parent='serie' %}">Añadir Episodio (Serie)</a></li>
+                             <li><hr></li>
+                            <li><a href="{% url 'catalogo:agregar_temporada' tipo_parent='anime' %}">Añadir Temporada (Anime)</a></li>
+                            <li><a href="{% url 'catalogo:agregar_episodio' tipo_parent='anime' %}">Añadir Episodio (Anime)</a></li>
+                            <li><hr></li>
+                            {# Para el admin de Django, el namespace es 'admin' #}
+                            <li><a href="{% url 'admin:index' %}" target="_blank">Panel Django</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <div class="search-container">
+                {# --- CORRECCIÓN AQUÍ --- #}
+                <form action="{% url 'catalogo:busqueda' %}" method="get">
+                    <input type="search" name="q" placeholder="Buscar título, actor..." value="{{ request.GET.q }}" required>
+                    <button type="submit">Buscar</button>
+                </form>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        {% block ad_banner_top %}{% include "catalogo/partials/_ad_banner_placeholder.html" %}{% endblock %}
+        {% block content %}
+        {% endblock %}
+        {% block ad_banner_bottom %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>© {% now "Y" %} CineManía. Todos los derechos reservados.</p>
+        <p>Diseñado con ❤️ para los amantes del cine, series y anime.</p>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

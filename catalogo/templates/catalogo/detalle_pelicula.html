@@ -1,0 +1,60 @@
+{% extends "catalogo/base.html" %}
+{% load static %}
+{% block title %}{{ pelicula.titulo }} - CineManía{% endblock %}
+
+{% block ad_banner_top %}
+    {# Puedes decidir si quieres un banner aquí o no. Si no, elimina este bloque. #}
+    {# {% include "catalogo/partials/_ad_banner_placeholder.html" %} #}
+{% endblock %}
+
+{% block content %}
+<article class="detalle-contenido">
+    <div class="detalle-portada">
+        <img src="{{ pelicula.portada_url|default_if_none:'' }}{% if not pelicula.portada_url %}{% static 'images/placeholder_poster.png' %}{% endif %}" alt="Portada de {{ pelicula.titulo }}">
+    </div>
+    <div class="detalle-info">
+        <h1>{{ pelicula.titulo }}</h1>
+        <p><strong>Año:</strong> {{ pelicula.año_lanzamiento }}</p>
+        <p class="generos-lista"><strong>Géneros:</strong>
+            {% for genero in pelicula.generos.all %}
+                <span>{{ genero.nombre }}</span>
+            {% empty %}
+                <span>No especificado</span>
+            {% endfor %}
+        </p>
+        <p><strong>Calificación:</strong> {{ pelicula.calificacion }}/10 ★</p>
+        <p><strong>Elenco:</strong> {{ pelicula.elenco|default:"No disponible" }}</p>
+        <p><strong>Sinopsis:</strong></p>
+        <p>{{ pelicula.sinopsis|linebreaksbr|default:"Sinopsis no disponible." }}</p>
+
+        {# Placeholder para un anuncio en bloque dentro de la info #}
+        {% include "catalogo/partials/_ad_block_placeholder.html" %}
+    </div>
+</article>
+
+<section class="video-reproductor">
+    <h2>Ver Película</h2>
+    {% if pelicula.iframe_url %}
+        <iframe src="{{ pelicula.iframe_url }}"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+        </iframe>
+    {% else %}
+        <p style="text-align:center; padding: 20px; background-color: #111; border-radius: 5px;">Video no disponible en este momento.</p>
+    {% endif %}
+</section>
+
+{# Incluir la sección de comentarios #}
+{# Pasamos 'total_comentarios_en_vista' que debería ser calculado en la vista _get_comments_and_form #}
+{# y devuelto en el contexto de detalle_pelicula #}
+{% with total_comentarios_en_vista=comentarios.count %} {# O el total real si lo calculaste en la vista #}
+    {% include "catalogo/partials/_comentarios.html" with item=pelicula comentarios=comentarios form_comentario=form_comentario mostrar_mas_comentarios=mostrar_mas_comentarios content_type_id=content_type_id object_id=object_id comentario_enviado=comentario_enviado total_comentarios_en_vista=total_comentarios_en_vista %}
+{% endwith %}
+
+{% endblock %}
+
+{% block ad_banner_bottom %}
+    {# Puedes decidir si quieres un banner aquí o no. Si no, elimina este bloque. #}
+    {% include "catalogo/partials/_ad_banner_placeholder.html" %}
+{% endblock %}
