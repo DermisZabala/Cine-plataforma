@@ -21,7 +21,9 @@ SECRET_KEY = os.environ.get(
 
 # DEBUG: Leer desde variable de entorno. Por defecto False para producción.
 # En Vercel, establece la variable de entorno DEBUG a 'False' (la cadena).
-DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
+
+DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true' #CAMBIAR AL HACER CAMBIO EN GITHUB
+# DEBUG = True # cambiar al ejecutar en local
 
 # ALLOWED_HOSTS: Leer desde variable de entorno.
 # En Vercel, establece la variable ALLOWED_HOSTS como 'tu-dominio.vercel.app,.vercel.app'

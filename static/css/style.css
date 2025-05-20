@@ -89,6 +89,8 @@ nav ul li a.active {
 }
 .search-container form {
     display: flex;
+    margin: 0 auto;
+
 }
 .search-container input[type="search"] {
     padding: 8px 12px;
@@ -228,6 +230,14 @@ h2.section-title {
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
 }
 
+.contenido-item .tipo-tag{
+    background-color: #6200ea;
+    margin: -5px 80px 10px 5px;
+    border-radius: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
 .contenido-item:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 20px rgba(98, 0, 234, 0.25); /* Sombra morada sutil */
@@ -236,7 +246,7 @@ h2.section-title {
 .contenido-item img {
     width: 100%;
     height: 300px;
-    object-fit: cover;
+    object-fit: fill;
     border-bottom: 3px solid #6200ea; /* Detalle de color */
 }
 
@@ -291,7 +301,7 @@ h2.section-title {
     flex-wrap: wrap;
     gap: 40px; /* Más espacio */
     margin-top: 20px;
-    padding: 20px;
+    padding: 0px;
     background-color: rgba(28, 28, 43, 0.7); /* Fondo semitransparente para el bloque de detalle */
     border-radius: 12px;
     box-shadow: 0 0 20px rgba(0,0,0,0.3);
@@ -300,6 +310,7 @@ h2.section-title {
 .detalle-portada {
     flex: 1;
     min-width: 280px;
+    padding: 10px;
 }
 
 .detalle-portada img {
@@ -314,6 +325,7 @@ h2.section-title {
 .detalle-info {
     flex: 2;
     min-width: 320px;
+    padding: 10px;
 }
 
 .detalle-info h1 {
@@ -612,6 +624,24 @@ h2.section-title {
     margin-bottom: 20px;
     color: #bbb;
 }
+
+.resultados-container 
+.filtrar a{
+    color: #03a9f4;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid transparent;
+}
+
+.resultados-container 
+.filtrar a:active {
+    color: white;
+    background-color: blue;
+    font-weight: bold;
+    border-color: blue;
+    border-radius: 10px;
+}
+
 .resultados-container .query-info strong {
     color: #03a9f4;
 }
@@ -642,13 +672,15 @@ h2.section-title {
     height: 90px;
 }
 .ad-block-placeholder {
-    width: 100%;
+    margin: 0;
+    width: 80%;
     max-width: 300px;
     height: 250px; /* Bloque mediano */
+    margin: 0 auto;
 }
 /* Ubicaciones específicas */
 .sidebar .ad-block-placeholder {
-    margin: 20px 0;
+    margin: 0 auto;
 }
 .detalle-info .ad-block-placeholder { /* Debajo de la sinopsis */
     margin-top: 20px;
@@ -743,8 +775,11 @@ footer {
         font-size: 1rem;
         padding: 0.4rem 0.8rem;
     }
+    .search-container{
+        width: 80%;
+    }
     .search-container input[type="search"]{
-        font-size: 0.8rem;
+        font-size: 0.7rem;
     }
     .search-container button[type="submit"]{
         font-size: 0.8rem;
@@ -766,7 +801,7 @@ footer {
         padding: 10px 15px;
     }
     .ultimas-publicaciones .contenido-grid {
-         grid-template-columns: 1fr; /* Una columna para las últimas en móviles muy pequeños */
+        grid-template-columns: 1fr; /* Una columna para las últimas en móviles muy pequeños */
     }
 }
 

@@ -19,7 +19,7 @@
     </div>
     
     {% comment %} Filtros adicionales (opcional) {% endcomment %}
-    <div style="text-align: center; margin-bottom: 20px;">
+    <div class="filtrar" style="text-align: center; margin-bottom: 20px;">
         Filtrar por:
         <a href="{% url 'catalogo:busqueda' %}?q={{ query }}&tipo=todos" class="{% if not tipo_filtro or tipo_filtro == 'todos' %}active{% endif %}">Todos</a> |
         <a href="{% url 'catalogo:busqueda' %}?q={{ query }}&tipo=peliculas" class="{% if tipo_filtro == 'peliculas' %}active{% endif %}">Películas</a> |
