@@ -45,7 +45,7 @@ header .header-content {
 
 header h1 a {
     font-family: 'Orbitron', sans-serif; /* Fuente futurista/tecnológica */
-    color: #6200ea; /* Morado neón */
+    color: #ffffff; /* Morado neón */
     text-decoration: none;
     font-size: 2.2rem;
     text-shadow: 0 0 5px #6200ea, 0 0 10px #6200ea;
@@ -372,7 +372,7 @@ h2.section-title {
 }
 .video-reproductor iframe, .episodio-reproductor iframe {
     width: 100%;
-    min-height: 480px;
+    min-height: 550px;
     border: none;
     border-radius: 5px;
 }
@@ -634,7 +634,7 @@ h2.section-title {
 }
 
 .resultados-container 
-.filtrar a:active {
+.filtrar a:active{
     color: white;
     background-color: blue;
     font-weight: bold;
