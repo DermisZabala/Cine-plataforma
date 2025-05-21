@@ -2,8 +2,14 @@
 
 from pathlib import Path
 import os  # Para leer variables de entorno
-# import dj_database_url # Descomenta si usas una DB externa como PostgreSQL
-# from decouple import config # Descomenta si prefieres usar python-decouple
+import dj_database_url 
+from decouple import config # Necesitas pip install python-decouple
+# ...
+
+DEBUG = config('DEBUG', default=False, cast=bool)
+SECRET_KEY = config('SECRET_KEY', default='default-inseguro')
+# etc.
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -99,14 +105,25 @@ DATABASES = {
     }
 }
 
-# --- (Opcional) Para usar una DB externa en Vercel (como Vercel Postgres) ---
-# Descomenta estas líneas y asegúrate de tener 'dj-database-url' en requirements.txt
-# DATABASE_URL = os.environ.get('DATABASE_URL')
-# if DATABASE_URL:
-#     DATABASES['default'] = dj_database_url.config(
-#         conn_max_age=600,
-#         ssl_require=os.environ.get('DB_SSL_REQUIRE', 'False').lower() == 'true' # Vercel Postgres suele necesitar SSL
-#     )
+# --- MODIFICACIONES AQUÍ PARA USAR POSTGRESQL EN VERCEL ---
+# Intentar obtener la URL de conexión de la variable de entorno 'POSTGRES_URL'
+# Esta es la variable que Vercel suele crear para su integración con Neon/Postgres.
+DATABASE_CONNECTION_URL = os.environ.get('POSTGRES_URL') # O 'DATABASE_URL' si es la que configuraste con la URL de Neon
+
+if DATABASE_CONNECTION_URL:
+    print(f"INFO: Conectando a PostgreSQL usando la variable de entorno.") # Mensaje para logs de Vercel
+    DATABASES['default'] = dj_database_url.parse(
+        DATABASE_CONNECTION_URL,
+        conn_max_age=600,
+        # Vercel Postgres (Neon) usualmente requiere SSL.
+        # dj_database_url a menudo infiere esto de la URL si incluye ?sslmode=require.
+        # Para ser explícito o si tienes problemas:
+        ssl_require=True # Puedes hacer esto configurable también: os.environ.get('DB_SSL_REQUIRE', 'True').lower() == 'true'
+    )
+else:
+    # Esto se ejecutará si estás en tu máquina local y no tienes POSTGRES_URL (o la variable que uses) definida
+    print("INFO: POSTGRES_URL (o similar) no encontrada, usando configuración de base de datos SQLite local.")
+# --- FIN DE MODIFICACIONES PARA POSTGRESQL --
 
 
 # Password validation

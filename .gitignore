@@ -1,0 +1,55 @@
+# Entornos Virtuales de Python
+# No subas la carpeta completa del entorno virtual
+__pycache__/
+*.py[cod]
+venv/
+env/
+.venv/
+ENV/
+.env # Si usas un archivo .env para variables de entorno locales
+
+# Base de datos SQLite local (NO la usarás en Vercel, que usará PostgreSQL)
+db.sqlite3
+db.sqlite3-journal
+
+# Archivos de configuración local que NO deben estar en el repositorio
+# (si tienes un local_settings.py para secretos locales)
+local_settings.py
+*.local.py
+
+# Archivos estáticos recolectados (Vercel los genera con collectstatic)
+staticfiles/
+# static_root/ # Otra forma común de nombrar la carpeta de STATIC_ROOT
+
+# Archivos de media (si los subes localmente, considera un servicio de almacenamiento para producción)
+# mediafiles/ # Si tu MEDIA_ROOT se llama así
+# media/
+
+# Archivos de registro
+logs/
+*.log
+*.log.*
+
+# Cobertura de tests
+.coverage
+.coverage.*
+htmlcov/
+
+# Archivos específicos de IDEs y editores
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.sublime-project
+*.sublime-workspace
+
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Otros
+*.swp
+*~
